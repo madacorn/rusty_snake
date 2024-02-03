@@ -10,6 +10,7 @@ const HOVERED_BUTTON: Color = Color::rgb(0.25, 0.25, 0.25);
 const PRESSED_BUTTON: Color = Color::rgb(0.35, 0.75, 0.35);
 
 fn button_system(
+    mut next_state: ResMut<NextState<GameState>>,
     mut interaction_query: Query<
         (
             &Interaction,
@@ -28,6 +29,7 @@ fn button_system(
                 text.sections[0].value = "Press".to_string();
                 *color = PRESSED_BUTTON.into();
                 border_color.0 = Color::RED;
+                next_state.set(GameState::InGame);
             }
             Interaction::Hovered => {
                 text.sections[0].value = "Hover".to_string();
@@ -35,7 +37,7 @@ fn button_system(
                 border_color.0 = Color::WHITE;
             }
             Interaction::None => {
-                text.sections[0].value = "Button".to_string();
+                //text.sections[0].value = "Button".to_string();
                 *color = NORMAL_BUTTON.into();
                 border_color.0 = Color::BLACK;
             }
