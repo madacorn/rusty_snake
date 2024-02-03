@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+mod game;
 mod menu;
 
 #[derive(PartialEq, Eq, Debug, Hash, Clone, Default, States)]
@@ -14,7 +15,7 @@ fn setup(mut commands: Commands) {
 }
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins, menu::MenuPlugin))
+        .add_plugins((DefaultPlugins, menu::MenuPlugin, game::GamePlugin))
         .add_state::<GameState>()
         .add_systems(Startup, setup)
         .run();
